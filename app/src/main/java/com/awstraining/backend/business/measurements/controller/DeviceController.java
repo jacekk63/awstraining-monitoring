@@ -33,6 +33,7 @@ class DeviceController implements DeviceIdApi {
         LOGGER.info("Publishing measurement for device '{}'", deviceId);
         final MeasurementDO measurementDO = fromMeasurement(deviceId, measurement);
         service.saveMeasurement(measurementDO);
+        LOGGER.info("Retrieving all measurements for device id '{}'", measurementDO.getDeviceId());
         return ResponseEntity.ok(measurement);
     }
     @Override
