@@ -37,6 +37,7 @@ class DeviceController implements DeviceIdApi {
     @Override
     public ResponseEntity<Measurement> publishMeasurements(final String deviceId, final Measurement measurement) {
         LOGGER.info("Publishing measurement for device '{}'", deviceId);
+        meterRegistry.counter("publishMeasurementsABC", "methodABC", "invocationABC").increment();
         publishMeasurements();
         final MeasurementDO measurementDO = fromMeasurement(deviceId, measurement);
 
@@ -53,6 +54,7 @@ class DeviceController implements DeviceIdApi {
                 .map(this::toMeasurement)
                 .toList();
 
+        meterRegistry.counter("retrieveMeasurementsABC", "methodABC", "invocationABC").increment();
         retrieveMeasurements();
 
         final Measurements measurementsResult = new Measurements();
